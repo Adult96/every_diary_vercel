@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { addDiary, editDiary } from '../redux/module/diarySlice';
+import { addDiary, editDiary } from '../redux/module/diary/diarySlice';
 
 import Button from '../element/Button';
 

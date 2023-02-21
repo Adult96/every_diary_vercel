@@ -3,8 +3,12 @@ import styled from 'styled-components';
 import Button from '../element/Button';
 import Input from '../element/Input';
 import { AiFillLock } from 'react-icons/ai';
+import { HiOutlineUserAdd } from 'react-icons/hi';
+
 import Valid from '../validation/inputValidation';
 import ALERT from '../constants/alert';
+import { useDispatch } from 'react-redux';
+import { __postLogin } from '../redux/module/login/loginPostSlice';
 
 export default function Login() {
   const [id, setId] = useState('');
@@ -12,6 +16,7 @@ export default function Login() {
   const [pwCheck, setPwCheck] = useState('');
   const [signUp, setSignUp] = useState(false);
   const [showPw, setShowPw] = useState(false);
+  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -28,6 +33,8 @@ export default function Login() {
         return alert(ALERT.CHECK_EMPTY);
       }
     }
+
+    dispatch(__postLogin({ id, pw }));
   };
 
   const handleSignUp = () => {
@@ -40,9 +47,7 @@ export default function Login() {
   return (
     <LoginWrapper>
       <LoginForm onSubmit={handleSubmit}>
-        <Text>
-          <AiFillLock />
-        </Text>
+        <h1>{signUp ? <HiOutlineUserAdd /> : <AiFillLock />}</h1>
         <Input
           name='id'
           width='20rem'
@@ -121,8 +126,6 @@ const LoginForm = styled.form`
   padding: 1rem;
   gap: 1rem;
 `;
-
-const Text = styled.h1``;
 
 const ShowPasswordContainer = styled.div`
   display: flex;

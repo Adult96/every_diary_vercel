@@ -9,7 +9,7 @@ import CalendarContainer from '../styles/calendarStyle';
 import moment from 'moment';
 import styled from 'styled-components';
 
-import { __getDiary } from '../redux/module/diarySlice';
+import { __getDiary } from '../redux/module/diary/diarySlice';
 import Loading from '../components/Loading';
 
 function CalendarPage() {
