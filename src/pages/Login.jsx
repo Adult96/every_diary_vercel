@@ -10,6 +10,7 @@ export default function Login() {
   const [pw, setPw] = useState('');
   const [pwCheck, setPwCheck] = useState('');
   const [signUp, setSignUp] = useState(false);
+  const [showPw, setShowPw] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -29,6 +30,9 @@ export default function Login() {
   };
 
   const handleSignUp = () => {
+    setId('');
+    setPw('');
+    setPwCheck('');
     setSignUp(v => !v);
   };
 
@@ -49,6 +53,7 @@ export default function Login() {
           autoFocus={true}
         />
         <Input
+          type={showPw ? 'text' : 'password'}
           width='20rem'
           height='2.5rem'
           fontSize='1.3rem'
@@ -58,6 +63,7 @@ export default function Login() {
         />
         {signUp && (
           <Input
+            type={showPw ? 'text' : 'password'}
             width='20rem'
             height='2.5rem'
             fontSize='1.3rem'
@@ -66,6 +72,15 @@ export default function Login() {
             placeholder='PW CHECK'
           />
         )}
+        <ShowPasswordContainer>
+          <Input
+            type='checkbox'
+            onChange={e => {
+              setShowPw(e.target.checked);
+            }}
+          />
+          <span>Show Password</span>
+        </ShowPasswordContainer>
         <ButtonContainer>
           <Button width='10rem' height='3rem'>
             Login
@@ -107,6 +122,13 @@ const LoginForm = styled.form`
 `;
 
 const Text = styled.h1``;
+
+const ShowPasswordContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
 
 const ButtonContainer = styled.div`
   display: flex;

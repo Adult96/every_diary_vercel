@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function Input({
+  type,
   width,
   height,
   fontSize,
@@ -15,6 +16,7 @@ export default function Input({
     <InputContainer>
       {children}
       <InputElement
+        type={type}
         width={width}
         height={height}
         fontSize={fontSize}
