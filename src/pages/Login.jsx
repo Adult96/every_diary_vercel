@@ -9,17 +9,27 @@ export default function Login() {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [pwCheck, setPwCheck] = useState('');
-  const [signUp, setsignUp] = useState(false);
+  const [signUp, setSignUp] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
+
     if (signUp) {
+      if (!Valid.formEmpty(id, pw, pwCheck)) {
+        return alert('공백은 입력할 수 없습니다.');
+      }
+      if (!Valid.pwDifferentCheck(pw, pwCheck)) {
+        return alert('비밀 번호를 다시 확인해 주세요.');
+      }
     } else {
+      if (!Valid.formEmpty(id, pw)) {
+        return alert('공백은 입력할 수 없습니다.');
+      }
     }
   };
 
   const handleSignUp = () => {
-    setsignUp(v => !v);
+    setSignUp(v => !v);
   };
 
   return (
@@ -57,10 +67,15 @@ export default function Login() {
           />
         )}
         <ButtonContainer>
-          <Button width='5rem' height='3rem'>
+          <Button width='10rem' height='3rem'>
             Login
           </Button>
-          <Button width='5rem' height='3rem' click={handleSignUp}>
+          <Button
+            width='10rem'
+            height='3rem'
+            type='button'
+            click={handleSignUp}
+          >
             {signUp ? 'back' : 'SignUp'}
           </Button>
         </ButtonContainer>

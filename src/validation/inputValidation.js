@@ -10,13 +10,14 @@ const Valid = {
   },
 
   formEmpty(...text) {
-    const textArr = text.map(v => v.length);
-    if (textArr.length <= 0) return false;
+    const textArr = text.filter(v => v === '');
+    console.log(textArr);
+    if (textArr.length !== 0) return false;
     return true;
   },
 
   pwDifferentCheck(...text) {
-    if (new Set(...text).size === text.length) return false;
+    if (new Set([...text]).size === text.length) return false;
     return true;
   },
 };

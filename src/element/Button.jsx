@@ -5,6 +5,7 @@ export default function Button({
   width,
   height,
   fontSize,
+  type,
   mode,
   click,
   children,
@@ -14,6 +15,7 @@ export default function Button({
       width={width}
       height={height}
       fontSize={fontSize}
+      type={type}
       mode={mode}
       onClick={click}
     >
