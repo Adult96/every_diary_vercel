@@ -46,15 +46,15 @@ export default function Login() {
   const loginDispatch = () => {
     if (signUp) {
       dispatch(__postLogin({ id: id, password: pw }));
-      reestLoginInput();
+      resetLoginInput();
       setSignUp(false);
     } else {
       dispatch(__getLogin({ id: id, password: pw }));
-      reestLoginInput();
+      resetLoginInput();
     }
   };
 
-  const reestLoginInput = () => {
+  const resetLoginInput = () => {
     setId('');
     setPw('');
     setPwCheck('');
