@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Button from '../element/Button';
 import Input from '../element/Input';
 import { AiFillLock } from 'react-icons/ai';
+import Valid from '../validation/inputValidation';
 
 export default function Login() {
   const [id, setId] = useState('');
