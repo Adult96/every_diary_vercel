@@ -7,6 +7,7 @@ import Diary from './pages/Diary';
 import { Provider } from 'react-redux';
 import store from './redux/config/configStore';
 import DiaryDetail from './components/DiaryDetail';
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Login />,
+      },
+      {
+        path: '/calendar',
         element: <CalendarPage />,
       },
       {
