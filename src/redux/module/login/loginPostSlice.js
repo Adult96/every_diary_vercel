@@ -13,12 +13,16 @@ export const __postLogin = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(
+      const { status } = await axios.post(
         `${process.env.REACT_APP_LOGIN_URL_KEY}/register`,
         payload
       );
 
-      return thunkAPI.fulfillWithValue(response.data);
+      if (status === 201) {
+        alert('회원가입 완료');
+      }
+
+      return thunkAPI.fulfillWithValue();
     } catch (error) {
       const {
         status,
@@ -26,7 +30,7 @@ export const __postLogin = createAsyncThunk(
       } = error.response;
 
       if (status === 401) {
-        console.log(message);
+        alert(message);
       }
 
       return thunkAPI.rejectWithValue(error);
@@ -46,7 +50,6 @@ const postLoginSlice = createSlice({
     bulider.addCase(__postLogin.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      state.diary = action.payload;
     });
     bulider.addCase(__postLogin.rejected, (state, action) => {
       state.isLoading = false;
