@@ -13,6 +13,34 @@ export const __postLogin = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
+      const {
+        data: { token },
+      } = await axios.post(
+        `${process.env.REACT_APP_LOGIN_URL_KEY}/login`,
+        payload
+      );
+
+      console.log(token);
+      return thunkAPI.fulfillWithValue();
+    } catch (error) {
+      const {
+        status,
+        data: { message },
+      } = error.response;
+
+      if (status === 401) {
+        alert(message);
+      }
+
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __postSignIn = createAsyncThunk(
+  'POST_LOGIN',
+  async (payload, thunkAPI) => {
+    try {
       const { status } = await axios.post(
         `${process.env.REACT_APP_LOGIN_URL_KEY}/register`,
         payload

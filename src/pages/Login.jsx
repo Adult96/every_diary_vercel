@@ -9,7 +9,10 @@ import Valid from '../validation/inputValidation';
 import ALERT from '../constants/alert';
 
 import { useDispatch } from 'react-redux';
-import { __postLogin } from '../redux/module/login/loginPostSlice';
+import {
+  __postLogin,
+  __postSignIn,
+} from '../redux/module/login/loginPostSlice';
 import { __getLogin } from '../redux/module/login/loginGetSlice';
 
 export default function Login() {
@@ -40,16 +43,17 @@ export default function Login() {
   };
 
   const handleSignUp = () => {
+    resetLoginInput();
     setSignUp(v => !v);
   };
 
   const loginDispatch = () => {
     if (signUp) {
-      dispatch(__postLogin({ id: id, password: pw }));
+      dispatch(__postSignIn({ id: id, password: pw }));
       resetLoginInput();
       setSignUp(false);
     } else {
-      dispatch(__getLogin({ id: id, password: pw }));
+      dispatch(__postLogin({ id: id, password: pw }));
       resetLoginInput();
     }
   };
