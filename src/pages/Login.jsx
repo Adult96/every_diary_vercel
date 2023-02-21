@@ -4,6 +4,7 @@ import Button from '../element/Button';
 import Input from '../element/Input';
 import { AiFillLock } from 'react-icons/ai';
 import Valid from '../validation/inputValidation';
+import ALERT from '../constants/alert';
 
 export default function Login() {
   const [id, setId] = useState('');
@@ -17,14 +18,14 @@ export default function Login() {
 
     if (signUp) {
       if (!Valid.formEmpty(id, pw, pwCheck)) {
-        return alert('공백은 입력할 수 없습니다.');
+        return alert(ALERT.CHECK_EMPTY);
       }
       if (!Valid.pwDifferentCheck(pw, pwCheck)) {
-        return alert('비밀 번호를 다시 확인해 주세요.');
+        return alert(ALERT.CHECK_DIFF_PW);
       }
     } else {
       if (!Valid.formEmpty(id, pw)) {
-        return alert('공백은 입력할 수 없습니다.');
+        return alert(ALERT.CHECK_EMPTY);
       }
     }
   };
