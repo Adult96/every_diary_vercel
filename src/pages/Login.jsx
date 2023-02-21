@@ -7,8 +7,10 @@ import { HiOutlineUserAdd } from 'react-icons/hi';
 
 import Valid from '../validation/inputValidation';
 import ALERT from '../constants/alert';
+
 import { useDispatch } from 'react-redux';
 import { __postLogin } from '../redux/module/login/loginPostSlice';
+import { __getLogin } from '../redux/module/login/loginGetSlice';
 
 export default function Login() {
   const [id, setId] = useState('');
@@ -34,14 +36,28 @@ export default function Login() {
       }
     }
 
-    dispatch(__postLogin({ id, pw }));
+    loginDispatch();
   };
 
   const handleSignUp = () => {
+    setSignUp(v => !v);
+  };
+
+  const loginDispatch = () => {
+    if (signUp) {
+      dispatch(__postLogin({ id: id, password: pw }));
+      setSignUp(false);
+      reestLoginInput();
+    } else {
+      dispatch(__getLogin({ id: id, password: pw }));
+      reestLoginInput();
+    }
+  };
+
+  const reestLoginInput = () => {
     setId('');
     setPw('');
     setPwCheck('');
-    setSignUp(v => !v);
   };
 
   return (
@@ -89,7 +105,7 @@ export default function Login() {
         </ShowPasswordContainer>
         <ButtonContainer>
           <Button width='10rem' height='3rem'>
-            Login
+            {signUp ? 'Enter' : 'Login'}
           </Button>
           <Button
             width='10rem'

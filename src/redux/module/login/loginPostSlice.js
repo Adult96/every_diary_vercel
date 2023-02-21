@@ -13,23 +13,29 @@ export const __postLogin = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      console.log(payload);
       const response = await axios.post(
-        `${process.env.REACT_APP_DIARY_API_KEY}/register`,
-        { id: payload.id, pw: payload.pw },
-        { withCredentials: true }
+        `${process.env.REACT_APP_LOGIN_URL_KEY}/register`,
+        payload
       );
 
-      console.log(response);
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
+      const {
+        status,
+        data: { message },
+      } = error.response;
+
+      if (status === 401) {
+        console.log(message);
+      }
+
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
 const postLoginSlice = createSlice({
-  name: 'diary',
+  name: 'postLogin',
   initialState,
   reducers: {},
   extraReducers: bulider => {
