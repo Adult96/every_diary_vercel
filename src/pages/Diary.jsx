@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AiFillFileAdd } from 'react-icons/ai';
 
-import { __getDiary } from '../redux/module/diary/diarySlice';
-import { deleteDiary } from '../redux/module/diary/diarySlice';
+import { __getDiary } from '../utils/redux/module/diary/diarySlice';
+import { deleteDiary } from '../utils/redux/module/diary/diarySlice';
 
 import styled from 'styled-components';
 import Button from '../element/Button';

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { setCookie } from '../../../cookie';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
 
@@ -13,14 +14,15 @@ export const __postLogin = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const {
-        data: { token },
-      } = await axios.post(
+      const response = await axios.post(
         `${process.env.REACT_APP_LOGIN_URL_KEY}/login`,
         payload
       );
 
-      console.log(token);
+      const accessToken = response.data.token;
+
+      setCookie('accessToken', accessToken);
+
       return thunkAPI.fulfillWithValue();
     } catch (error) {
       const {

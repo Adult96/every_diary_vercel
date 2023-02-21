@@ -12,8 +12,8 @@ import { useDispatch } from 'react-redux';
 import {
   __postLogin,
   __postSignIn,
-} from '../redux/module/login/loginPostSlice';
-import { __getLogin } from '../redux/module/login/loginGetSlice';
+} from '../utils/redux/module/login/loginPostSlice';
+import { __getLogin } from '../utils/redux/module/login/loginGetSlice';
 
 export default function Login() {
   const [id, setId] = useState('');

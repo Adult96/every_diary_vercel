@@ -5,7 +5,7 @@ import CalendarPage from './pages/Calendar';
 import App from './App';
 import Diary from './pages/Diary';
 import { Provider } from 'react-redux';
-import store from './redux/config/configStore';
+import store from './utils/redux/config/configStore';
 import DiaryDetail from './components/DiaryDetail';
 import Login from './pages/Login';
 

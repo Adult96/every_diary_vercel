@@ -1,8 +1,6 @@
 import axios from 'axios';
-import { Cookies } from 'react-cookie';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
-const cookie = new Cookies();
 
 const initialState = {
   getLogin: [],
@@ -14,13 +12,11 @@ const initialState = {
 export const __getLogin = createAsyncThunk(
   'GET_DIARYS',
   async (payload, thunkAPI) => {
-    const accessToken = cookie.get('accessToken');
-    console.log(accessToken);
     try {
       const response = await axios.get(`${'http://3.38.191.164'}/user`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${'토큰넣기'}`,
         },
       });
       console.log(response);
