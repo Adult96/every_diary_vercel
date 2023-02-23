@@ -7,7 +7,9 @@ import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from './styles/theme';
 
 import ThemeMode from './components/ThemeMode';
-import { getCookie, removeCookie } from './utils/cookie';
+import LogOut from './components/LogOut';
+
+import { getCookie } from './utils/cookie';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -24,16 +26,11 @@ function App() {
     }
   }, [navigate, pathname]);
 
-  const handleLogOut = () => {
-    removeCookie('accessToken');
-    navigate('/');
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <ThemeMode theme={theme} darkMode={darkMode} onDarkMode={setDarkMode} />
-      {pathname === '/' ? '' : <LogOut onClick={handleLogOut}>로그아웃</LogOut>}
+      {pathname === '/' ? '' : <LogOut />}
 
       <Main>
         <Banner>
@@ -63,13 +60,6 @@ const Img = styled.img`
   object-fit: cover;
   border: 1px solid ${props => props.theme.borderColor};
   border-radius: 1rem 1rem 0 0;
-`;
-
-const LogOut = styled.button`
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 1rem;
 `;
 
 export default App;
