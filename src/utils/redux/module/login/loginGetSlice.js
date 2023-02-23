@@ -1,3 +1,4 @@
+import QUERY from '../../../../constants/query';
 import Axios from '../../../axios';
 import { removeCookie } from '../../../cookie';
 
@@ -19,7 +20,7 @@ export const __getLogin = createAsyncThunk(
       const {
         status,
         data: { message },
-      } = await axios.get('/user', {
+      } = await axios.get(QUERY.AXIOS_PATH.USER, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${payload}`,
@@ -41,7 +42,7 @@ export const __getLogin = createAsyncThunk(
         alert(message);
       }
 
-      removeCookie('accessToken');
+      removeCookie(QUERY.COOKIE.COOKIE_NAME);
 
       return thunkAPI.rejectWithValue();
     }

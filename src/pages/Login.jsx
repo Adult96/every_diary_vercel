@@ -17,6 +17,9 @@ import { getCookie } from '../utils/cookie';
 import { useNavigate } from 'react-router-dom';
 import { __getLogin } from '../utils/redux/module/login/loginGetSlice';
 
+import QUERY from '../constants/query';
+import ROUTER from '../constants/router';
+
 export default function Login() {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
@@ -53,9 +56,9 @@ export default function Login() {
   const loginProcess = async () => {
     await loginDispatch();
 
-    const token = getCookie('accessToken');
+    const token = getCookie(QUERY.COOKIE.COOKIE_NAME);
     token && (await getAuthorization(token));
-    token && navigate('/calendar');
+    token && navigate(ROUTER.PATH.CALENDAR);
   };
 
   const loginDispatch = async () => {

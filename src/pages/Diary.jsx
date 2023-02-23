@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import Button from '../element/Button';
 import DiaryItem from '../components/DiaryItem';
 import Loading from '../components/Loading';
+import ROUTER from '../constants/router';
 
 export default function Diary() {
   const { date } = useParams();
@@ -37,7 +38,10 @@ export default function Diary() {
           .filter(item => item.date === date)
           .map((item, index) => (
             <Container key={index}>
-              <Link to={`/diary/${date}/${item.id}`} state={{ ...item }}>
+              <Link
+                to={`${ROUTER.PATH.DIRAY}/${date}/${item.id}`}
+                state={{ ...item }}
+              >
                 <DiaryItem diary={item} />
               </Link>
               <BtnBox>
@@ -54,7 +58,10 @@ export default function Diary() {
             </Container>
           ))}
         <ItemAdd>
-          <Link to={`/diary/${date}/add`} state={{ date }}>
+          <Link
+            to={`${ROUTER.PATH.DIRAY}/${date}/${ROUTER.PATH.ADD}`}
+            state={{ date }}
+          >
             <Button width='100%' height='15rem' fontSize='4rem'>
               <AiFillFileAdd />
             </Button>

@@ -10,6 +10,8 @@ import ThemeMode from './components/ThemeMode';
 import LogOut from './components/LogOut';
 
 import { getCookie } from './utils/cookie';
+import QUERY from './constants/query';
+import ROUTER from './constants/router';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -18,11 +20,11 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const cookie = getCookie('accessToken');
-    if (cookie && pathname === '/') {
-      navigate('/calendar');
+    const cookie = getCookie(QUERY.COOKIE.COOKIE_NAME);
+    if (cookie && pathname === ROUTER.PATH.SLASH) {
+      navigate(ROUTER.PATH.CALENDAR);
     } else if (!cookie) {
-      navigate('/');
+      navigate(ROUTER.PATH.SLASH);
     }
   }, [navigate, pathname]);
 
@@ -30,7 +32,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <ThemeMode theme={theme} darkMode={darkMode} onDarkMode={setDarkMode} />
-      {pathname === '/' ? '' : <LogOut />}
+      {pathname === ROUTER.PATH.SLASH ? '' : <LogOut />}
 
       <Main>
         <Banner>

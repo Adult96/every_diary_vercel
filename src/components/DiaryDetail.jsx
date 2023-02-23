@@ -7,6 +7,7 @@ import Button from '../element/Button';
 
 import ALERT from '../constants/alert';
 import Valid from '../validation/inputValidation';
+import ROUTER from '../constants/router';
 
 export default function DiaryDetail() {
   const [titleAdd, setTitle] = useState('');
@@ -63,7 +64,7 @@ export default function DiaryDetail() {
         />
       </TextBox>
       <BtnBox>
-        {id === 'add' ? (
+        {id === ROUTER.NAME.ADD ? (
           <>
             <Button width='5rem' height='3rem' click={handleAddDiary}>
               추가

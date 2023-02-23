@@ -11,6 +11,7 @@ import styled from 'styled-components';
 
 import { __getDiary } from '../utils/redux/module/diary/diarySlice';
 import Loading from '../components/Loading';
+import ROUTER from '../constants/router';
 
 function CalendarPage() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function CalendarPage() {
 
   const handleCalendarDay = e => {
     const day = moment(e).format('YYYY-MM-DD');
-    navigate(`/diary/${day}`);
+    navigate(`${ROUTER.PATH.DIRAY}/${day}`);
   };
 
   //컴포넌트로 분리 하기

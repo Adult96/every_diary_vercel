@@ -1,3 +1,4 @@
+import QUERY from '../../../../constants/query';
 import Axios from '../../../axios';
 import { setCookie } from '../../../cookie';
 
@@ -16,10 +17,10 @@ export const __postLogin = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post('http://3.38.191.164/login', payload);
+      const response = await axios.post(QUERY.AXIOS_PATH.LOGIN, payload);
       const accessToken = response.data.token;
 
-      setCookie('accessToken', accessToken);
+      setCookie(QUERY.COOKIE.COOKIE_NAME, accessToken);
 
       return thunkAPI.fulfillWithValue();
     } catch (error) {
@@ -41,10 +42,7 @@ export const __postSignIn = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const { status } = await axios.post(
-        'http://3.38.191.164/register',
-        payload
-      );
+      const { status } = await axios.post(QUERY.AXIOS_PATH.REGISTER, payload);
 
       if (status === 201) {
         alert('회원가입 완료');
