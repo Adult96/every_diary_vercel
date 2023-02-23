@@ -57,12 +57,14 @@ export default function Login() {
   };
 
   const loginDispatch = async () => {
+    const loginData = { id: id, password: pw };
+
     if (signUp) {
-      await dispatch(__postSignIn({ id: id, password: pw }));
+      await dispatch(__postSignIn(loginData));
       resetLoginInput();
       setSignUp(false);
     } else {
-      await dispatch(__postLogin({ id: id, password: pw }));
+      await dispatch(__postLogin(loginData));
       resetLoginInput();
     }
   };

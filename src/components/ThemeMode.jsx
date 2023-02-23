@@ -27,6 +27,7 @@ const StyleMode = styled.div`
   position: absolute;
   width: 12vw;
   height: 5vh;
+  margin: 1rem 0;
   border-radius: 1rem;
   background-color: #dadada;
   transform: translateX(10px);

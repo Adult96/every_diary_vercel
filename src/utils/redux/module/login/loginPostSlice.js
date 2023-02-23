@@ -34,7 +34,7 @@ export const __postLogin = createAsyncThunk(
         alert(message);
       }
 
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue();
     }
   }
 );
@@ -63,7 +63,7 @@ export const __postSignIn = createAsyncThunk(
         alert(message);
       }
 
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue();
     }
   }
 );
