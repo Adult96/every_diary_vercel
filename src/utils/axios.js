@@ -8,23 +8,18 @@ export default class Axios {
   }
 
   async get(path, option) {
-    return axios.get(`${this.instance}${path}`, option);
+    return this.instance.get(path, option);
   }
 
   async post(path, payload) {
-    return axios.post(`${this.instance}${path}`, payload);
+    return this.instance.post(path, payload);
   }
 
   async delete(path, payload) {
-    return axios.delete(
-      `${process.env.REACT_APP_DIARY_API_KEY}${path}/${payload}`
-    );
+    return this.instance.delete(`${path}/${payload}`);
   }
 
   async patch(path, payload, option) {
-    return axios.patch(
-      `${process.env.REACT_APP_DIARY_API_KEY}${path}/${payload}`,
-      option
-    );
+    return this.instance.patch(`${path}/${payload}`, option);
   }
 }

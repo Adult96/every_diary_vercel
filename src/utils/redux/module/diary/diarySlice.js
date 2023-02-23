@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from '../../../axios';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
 
@@ -9,26 +9,21 @@ const initialState = {
   error: null,
 };
 
+const axios = new Axios(process.env.REACT_APP_DIARY_API_KEY);
+
 export const addDiary = async (payload, callback) => {
-  await axios.post(`${process.env.REACT_APP_DIARY_API_KEY}/diary`, payload);
+  await axios.post('/diary', payload);
   callback();
 };
 
 export const editDiary = async (payload, callback) => {
   const { id, title, content } = payload;
-  await axios.patch(
-    `${process.env.REACT_APP_DIARY_API_KEY}/diary/${id}
-  `,
-    {
-      title,
-      content,
-    }
-  );
+  await axios.patch('/diary', id, { title, content });
   callback();
 };
 
 export const deleteDiary = async (payload, callback) => {
-  await axios.delete(`${process.env.REACT_APP_DIARY_API_KEY}/diary/${payload}`);
+  await axios.delete('/diary', payload);
   callback();
 };
 
@@ -36,9 +31,7 @@ export const __getDiary = createAsyncThunk(
   'GET_DIARYS',
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_DIARY_API_KEY}/diary`
-      );
+      const response = await axios.get('/diary');
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
