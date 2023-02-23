@@ -54,7 +54,7 @@ export default function Login() {
     await loginDispatch();
 
     const token = getCookie('accessToken');
-    await getAuthorization(token);
+    token && (await getAuthorization(token));
     token && navigate('/calendar');
   };
 
