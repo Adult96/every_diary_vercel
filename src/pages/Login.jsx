@@ -13,7 +13,8 @@ import {
   __postLogin,
   __postSignIn,
 } from '../utils/redux/module/login/loginPostSlice';
-import { __getLogin } from '../utils/redux/module/login/loginGetSlice';
+import { getCookie } from '../utils/cookie';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [id, setId] = useState('');
@@ -22,6 +23,7 @@ export default function Login() {
   const [signUp, setSignUp] = useState(false);
   const [showPw, setShowPw] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -39,7 +41,7 @@ export default function Login() {
       }
     }
 
-    loginDispatch();
+    loginProcess();
   };
 
   const handleSignUp = () => {
@@ -47,13 +49,20 @@ export default function Login() {
     setSignUp(v => !v);
   };
 
-  const loginDispatch = () => {
+  const loginProcess = async () => {
+    await loginDispatch();
+
+    const token = getCookie('accessToken');
+    token && navigate('/calendar');
+  };
+
+  const loginDispatch = async () => {
     if (signUp) {
-      dispatch(__postSignIn({ id: id, password: pw }));
+      await dispatch(__postSignIn({ id: id, password: pw }));
       resetLoginInput();
       setSignUp(false);
     } else {
-      dispatch(__postLogin({ id: id, password: pw }));
+      await dispatch(__postLogin({ id: id, password: pw }));
       resetLoginInput();
     }
   };
