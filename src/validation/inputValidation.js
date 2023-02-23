@@ -11,7 +11,6 @@ const Valid = {
 
   formEmpty(...text) {
     const textArr = text.filter(v => v === '');
-    console.log(textArr);
     if (textArr.length !== 0) return false;
     return true;
   },

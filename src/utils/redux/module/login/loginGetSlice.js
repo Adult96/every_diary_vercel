@@ -1,7 +1,7 @@
 import Axios from '../../../axios';
 import { removeCookie } from '../../../cookie';
 
-const { createSlice, current, createAsyncThunk } = require('@reduxjs/toolkit');
+const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
 
 const initialState = {
   getLogin: [],
@@ -56,18 +56,14 @@ const getLoginSlice = createSlice({
     bulider.addCase(__getLogin.pending, (state, action) => {
       state.isLoading = true;
       state.isError = false;
-      console.log(1);
     });
     bulider.addCase(__getLogin.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      console.log(2);
     });
     bulider.addCase(__getLogin.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      console.log(current(state));
-      console.log(3);
     });
   },
 });

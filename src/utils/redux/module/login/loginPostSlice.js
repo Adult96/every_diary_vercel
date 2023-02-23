@@ -16,7 +16,7 @@ export const __postLogin = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post('/login', payload);
+      const response = await axios.post('http://3.38.191.164/login', payload);
       const accessToken = response.data.token;
 
       setCookie('accessToken', accessToken);
@@ -41,7 +41,10 @@ export const __postSignIn = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const { status } = await axios.post('/register', payload);
+      const { status } = await axios.post(
+        'http://3.38.191.164/register',
+        payload
+      );
 
       if (status === 201) {
         alert('회원가입 완료');
