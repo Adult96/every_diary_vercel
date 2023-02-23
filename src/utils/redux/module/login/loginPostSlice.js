@@ -1,4 +1,4 @@
-import axios from 'axios';
+import Axios from '../../../axios';
 import { setCookie } from '../../../cookie';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
@@ -10,15 +10,13 @@ const initialState = {
   error: null,
 };
 
+const axios = new Axios(process.env.REACT_APP_LOGIN_URL_KEY);
+
 export const __postLogin = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_LOGIN_URL_KEY}/login`,
-        payload
-      );
-
+      const response = await axios.post('/login', payload);
       const accessToken = response.data.token;
 
       setCookie('accessToken', accessToken);
@@ -43,10 +41,7 @@ export const __postSignIn = createAsyncThunk(
   'POST_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const { status } = await axios.post(
-        `${process.env.REACT_APP_LOGIN_URL_KEY}/register`,
-        payload
-      );
+      const { status } = await axios.post('/register', payload);
 
       if (status === 201) {
         alert('회원가입 완료');
