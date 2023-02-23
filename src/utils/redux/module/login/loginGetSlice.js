@@ -16,14 +16,14 @@ export const __getLogin = createAsyncThunk(
       const response = await axios.get(`${'http://3.38.191.164'}/user`, {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${'토큰넣기'}`,
+          Authorization: `Bearer ${payload}`,
         },
       });
       console.log(response);
 
-      return thunkAPI.fulfillWithValue(response.data);
+      return thunkAPI.fulfillWithValue();
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue();
     }
   }
 );

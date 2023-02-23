@@ -26,8 +26,10 @@ function CalendarPage() {
   }, [dispatch]);
 
   useEffect(() => {
-    const setDate = [...new Set(diary.map(v => v.date))];
-    diary && setMark(setDate);
+    if (diary) {
+      const setDate = [...new Set(diary.map(v => v.date))];
+      setMark(setDate);
+    }
   }, [diary]);
 
   const handleCalendarDay = e => {
