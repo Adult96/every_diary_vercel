@@ -10,5 +10,4 @@ const store = configureStore({
     postLogin,
   },
 });
-
 export default store;

@@ -1,6 +1,7 @@
-import axios from 'axios';
+import Axios from '../../../axios';
+import { removeCookie } from '../../../cookie';
 
-const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
+const { createSlice, current, createAsyncThunk } = require('@reduxjs/toolkit');
 
 const initialState = {
   getLogin: [],
@@ -9,20 +10,39 @@ const initialState = {
   error: null,
 };
 
+const axios = new Axios(process.env.REACT_APP_LOGIN_URL_KEY);
+
 export const __getLogin = createAsyncThunk(
-  'GET_DIARYS',
+  'GET_LOGIN',
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get(`${'http://3.38.191.164'}/user`, {
+      const {
+        status,
+        data: { message },
+      } = await axios.get('/user', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${payload}`,
         },
       });
-      console.log(response);
+
+      if (status === 200) {
+        console.log(message);
+      }
 
       return thunkAPI.fulfillWithValue();
     } catch (error) {
+      const {
+        status,
+        data: { message },
+      } = error.response;
+
+      if (status === 401) {
+        alert(message);
+      }
+
+      removeCookie('accessToken');
+
       return thunkAPI.rejectWithValue();
     }
   }
@@ -36,19 +56,21 @@ const getLoginSlice = createSlice({
     bulider.addCase(__getLogin.pending, (state, action) => {
       state.isLoading = true;
       state.isError = false;
+      console.log(1);
     });
     bulider.addCase(__getLogin.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      state.diary = action.payload;
+      console.log(2);
     });
     bulider.addCase(__getLogin.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      state.error = action.payload;
+      console.log(current(state));
+      console.log(3);
     });
   },
 });
 
-// export const {} = getDiarySlice.actions;
+// export const {} = getLoginSlice.actions;
 export default getLoginSlice.reducer;

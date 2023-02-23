@@ -71,8 +71,7 @@ export default function Login() {
     }
   };
 
-  const getAuthorization = async () => {
-    const token = getCookie('accessToken');
+  const getAuthorization = async token => {
     await dispatch(__getLogin(token));
   };
 
