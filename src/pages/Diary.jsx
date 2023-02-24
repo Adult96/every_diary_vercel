@@ -28,7 +28,6 @@ export default function Diary() {
     });
   };
 
-  // return <Loading />;
   if (isLoading) return <Loading />;
   if (isError) return <div>에러</div>;
   return (
@@ -59,7 +58,7 @@ export default function Diary() {
           ))}
         <ItemAdd>
           <Link
-            to={`${ROUTER.PATH.DIRAY}/${date}/${ROUTER.PATH.ADD}`}
+            to={`${ROUTER.PATH.DIRAY}/${date}${ROUTER.PATH.ADD}`}
             state={{ date }}
           >
             <Button width='100%' height='15rem' fontSize='4rem'>
